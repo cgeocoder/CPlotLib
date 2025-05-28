@@ -24,6 +24,8 @@ int main(int argc, char* argv[]) {
     // Plot 1 - line
 
     cpl::Plot plot1{ 8.0f, 1.0f, {-10.0f, 9.0f} };
+    plot1.set_title("Line");
+
     plot1.add_static_function(func1);
 
     wnd.add_plot(plot1);

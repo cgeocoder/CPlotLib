@@ -1,6 +1,7 @@
 #include "plot.h"
 #include "cpl_math.h"
 #include "primitives.h"
+#include "paths.h"
 
 namespace cpl {
 	const float Quality::Low = 1.0f;
@@ -8,11 +9,17 @@ namespace cpl {
 	const float Quality::High = 0.05f;
 	const float Quality::UltraHigh = 0.01f;
 
-	Plot::Plot(float radius, float step) : m_Radius{ radius }, m_Step{ step }, m_Center{ 0.0f, 0.0f }, m_FuncQuality{ cpl::Quality::UltraHigh } {
+	Plot::Plot(float radius, float step) : 
+		m_Radius{ radius }, m_Step{ step }, m_Center{ 0.0f, 0.0f }, 
+		m_FuncQuality{ cpl::Quality::UltraHigh }, m_Title{ nullptr }, m_Font{nullptr} {
+
 		redraw();
 	}
 
-	Plot::Plot(float radius, float step, const Vec2f& center) : m_Radius{ radius }, m_Step{ step }, m_Center{ center }, m_FuncQuality{ cpl::Quality::UltraHigh } {
+	Plot::Plot(float radius, float step, const Vec2f& center) : 
+		m_Radius{ radius }, m_Step{ step }, m_Center{ center }, 
+		m_FuncQuality{ cpl::Quality::UltraHigh }, m_Title{ nullptr }, m_Font{ nullptr } {
+
 		redraw();
 	}
 
@@ -104,5 +111,29 @@ namespace cpl {
 		for (Function& f : m_StaticFunctions) {
 			draw_static_function(f);
 		}
+	}
+
+	void Plot::set_title(const std::string& title) {
+		if (m_Title == nullptr)
+			m_Title = new sf::Text;
+
+		if (m_Font == nullptr) {
+			m_Font = new sf::Font;
+
+			if (!m_Font->loadFromFile(DEFAULT_FONT_PATH)) {
+				__debugbreak();
+			}
+		}
+		
+		m_Title->setFont(*m_Font);
+		m_Title->setCharacterSize(20);
+		m_Title->setScale({ 0.06f, 0.06f });
+
+		m_Title->setString(title);
+		m_Title->setFillColor(sf::Color::Black);
+		m_Title->setStyle(sf::Text::Regular);
+
+		m_Title->setOrigin({ (20 * title.length()) / 2.0f, 20 / 2.0f });
+		m_Title->setPosition({ m_Center.x, m_Radius + m_Center.y + m_Step });
 	}
 }

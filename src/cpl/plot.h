@@ -37,10 +37,16 @@ namespace cpl {
 		void add_static_function(const Function& f);
 		void add_static_function(const std::function<float(float)>& f);
 		void add_dynamic_function(Function& f);
+		
+		void set_title(const std::string& title);
 
 	private:
 		Vec2f m_Center;
 		float m_Radius, m_Step, m_FuncQuality;
+
+		sf::Text* m_Title;
+		sf::Font* m_Font;
+
 		std::vector<Line> m_Lines;
 		std::vector<Line> m_StaticFuncLines;
 		std::vector<Function> m_DynamicFunctions;

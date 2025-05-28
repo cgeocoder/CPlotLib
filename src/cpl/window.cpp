@@ -1,6 +1,7 @@
 #include "window.h"
 
 #include <SFML/Graphics.hpp>
+#include "paths.h"
 
 namespace cpl {
 	Window::Window() {
@@ -123,6 +124,23 @@ namespace cpl {
 
 			wnd.clear(sf::Color::White);
 			wnd.setView(view);
+
+			/*sf::Text tmp_text;
+			sf::Font font;
+			if (!font.loadFromFile(DEFAULT_FONT_PATH2)) {
+				__debugbreak();
+			}
+
+			tmp_text.setFont(font);
+			tmp_text.setCharacterSize(24);
+
+			tmp_text.setScale({ 0.05f, 0.05f });
+			tmp_text.setString("123");
+			tmp_text.setFillColor(sf::Color::Red);
+			tmp_text.setStyle(sf::Text::Bold);
+			tmp_text.setPosition(from_map_to_real(Vec2f{ 0.0f, 0.0f }));
+
+			wnd.draw(tmp_text);*/
 			
 			m_PlotMutex.lock();
 
@@ -134,6 +152,10 @@ namespace cpl {
 				for (Line& lines : plot.m_StaticFuncLines) {
 					wnd.draw(make_line(lines));
 				}
+
+				if (plot.m_Title) {
+					wnd.draw(*plot.m_Title);
+				}
 			}
 
 			m_PlotMutex.unlock();
@@ -143,11 +165,10 @@ namespace cpl {
 	}
 
 	void Window::add_plot(Plot& plot) {
+		if (plot.m_Title)
+			plot.m_Title->setPosition(from_map_to_real(plot.m_Title->getPosition()));
+
 		m_Plots.push_back(plot);
-	}
-
-	void Window::draw_plot(Plot& plot) {
-
 	}
 
 	void Window::done() {

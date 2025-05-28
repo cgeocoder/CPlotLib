@@ -52,7 +52,6 @@ namespace cpl {
 		~Window();
 
 		void add_plot(Plot& plot);
-		void draw_plot(Plot& plot);
 
 		// friend static sf::RectangleShape make_line(cpl::Vec2f, cpl::Vec2f, float);
 
