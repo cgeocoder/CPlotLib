@@ -8,6 +8,12 @@
 #include <vector>
 
 namespace cpl {
+	static const sf::Vector2f DEFAULT_FONT_SCALE = { 0.051f, 0.051f };
+	static const sf::Color DEFAULT_FONT_COLOR = sf::Color::Black;
+
+	static constexpr const unsigned int DEFAULT_FONT_CHAR_SIZE = 20;
+	static constexpr const sf::Text::Style DEFAULT_FONT_STYLE = sf::Text::Regular;
+
 	class Quality {
 	public:
 		static const float Low;
@@ -34,8 +40,10 @@ namespace cpl {
 		void set_center(const Vec2f& xy);
 
 		void set_quality(float quality);
-		void add_static_function(const Function& f);
-		void add_static_function(const std::function<float(float)>& f);
+
+		// add static function
+		void add_function(const std::function<float(float)>& f);
+		void add_function(const Function& f);
 		void add_dynamic_function(Function& f);
 		
 		void set_title(const std::string& title);

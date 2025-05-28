@@ -24,30 +24,35 @@ int main(int argc, char* argv[]) {
     // Plot 1 - line
 
     cpl::Plot plot1{ 8.0f, 1.0f, {-10.0f, 9.0f} };
-    plot1.set_title("Line");
+    plot1.set_title("Simple Line");
 
-    plot1.add_static_function(func1);
+    cpl::Function f1{ func1 };
+    f1.set_color("red");
+    plot1.add_function(f1);
 
     wnd.add_plot(plot1);
 
     // Plot 2 - parabola
 
     cpl::Plot plot2{ 8.0f, 1.0f, {10.0f, 9.0f} };
-    plot2.add_static_function(func2);
+    plot2.set_title("The parabola");
+    plot2.add_function(func2);
 
     wnd.add_plot(plot2);
 
     // Plot 3 - sinus
 
     cpl::Plot plot3{ 8.0f, 1.0f, {-10.0f, -9.0f} };
-    plot3.add_static_function(func3);
+    plot3.set_title("The sinus");
+    plot3.add_function(func3);
 
     wnd.add_plot(plot3);
 
     // Plot 4 - |x|
 
     cpl::Plot plot4{ 8.0f, 1.0f, {10.0f, -9.0f} };
-    plot4.add_static_function(func4);
+    plot4.set_title("y = |x|");
+    plot4.add_function(func4);
 
     wnd.add_plot(plot4);
 

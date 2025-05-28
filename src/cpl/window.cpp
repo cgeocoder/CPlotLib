@@ -144,7 +144,7 @@ namespace cpl {
 			
 			m_PlotMutex.lock();
 
-			for (Plot plot : m_Plots) {
+			for (Plot& plot : m_Plots) {
 				for (Line& lines : plot.m_Lines) {
 					wnd.draw(make_line(lines));
 				}
@@ -165,10 +165,13 @@ namespace cpl {
 	}
 
 	void Window::add_plot(Plot& plot) {
+		m_PlotMutex.lock();
+
 		if (plot.m_Title)
 			plot.m_Title->setPosition(from_map_to_real(plot.m_Title->getPosition()));
 
 		m_Plots.push_back(plot);
+		m_PlotMutex.unlock();
 	}
 
 	void Window::done() {
@@ -192,7 +195,7 @@ namespace cpl {
 		line.setOrigin(sf::Vector2f(0.0f, ln.m_Width / 2.0f));
 		line.setRotation(-ang_degrees);
 		line.setPosition(from_map_to_real(last_pos_point));
-		line.setFillColor(sf::Color::Black);
+		line.setFillColor(ln.m_Color);
 
 
 		return line;

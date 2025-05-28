@@ -5,8 +5,8 @@
 
 
 namespace cpl {
-	constexpr const char* DEFAULT_FONT_PATH = "C:\\Users\\Гео\\source\\repos\\CPlotLib\\CPlotLb\\res\\default.otf";
-	constexpr const char* DEFAULT_FONT_PATH2 = "C:\\Users\\Гео\\source\\repos\\CPlotLib\\CPlotLb\\res\\Trade_Gothic_Pro_Bold_Condensed_20.otf";
+	// Calibri font
+	constexpr const char* DEFAULT_FONT = "res\\calibri.ttf";
 }
 
 #endif // !__CPLOTLIB_PATHS_H__

@@ -11,14 +11,14 @@ namespace cpl {
 
 	Plot::Plot(float radius, float step) : 
 		m_Radius{ radius }, m_Step{ step }, m_Center{ 0.0f, 0.0f }, 
-		m_FuncQuality{ cpl::Quality::UltraHigh }, m_Title{ nullptr }, m_Font{nullptr} {
+		m_FuncQuality{ cpl::Quality::Medium }, m_Title{ nullptr }, m_Font{nullptr} {
 
 		redraw();
 	}
 
 	Plot::Plot(float radius, float step, const Vec2f& center) : 
 		m_Radius{ radius }, m_Step{ step }, m_Center{ center }, 
-		m_FuncQuality{ cpl::Quality::UltraHigh }, m_Title{ nullptr }, m_Font{ nullptr } {
+		m_FuncQuality{ cpl::Quality::Medium }, m_Title{ nullptr }, m_Font{ nullptr } {
 
 		redraw();
 	}
@@ -57,12 +57,12 @@ namespace cpl {
 	}
 
 	
-	void Plot::add_static_function(const Function& f) {
+	void Plot::add_function(const Function& f) {
 		draw_static_function(f);
 		m_StaticFunctions.push_back(f);
 	}
 
-	void Plot::add_static_function(const std::function<float(float)>& f) {
+	void Plot::add_function(const std::function<float(float)>& f) {
 		Function fn{ f };
 
 		draw_static_function(fn);
@@ -95,6 +95,7 @@ namespace cpl {
 
 	void Plot::set_quality(float quality) {
 		m_FuncQuality = quality;
+		redraw();
 	}
 
 	void Plot::redraw() {
@@ -120,20 +121,21 @@ namespace cpl {
 		if (m_Font == nullptr) {
 			m_Font = new sf::Font;
 
-			if (!m_Font->loadFromFile(DEFAULT_FONT_PATH)) {
-				__debugbreak();
+			if (!m_Font->loadFromFile(DEFAULT_FONT)) {
+				std::cout << "Plot::set_title(): sf::Font::loadFromFile() failed\n";
+				return;
 			}
 		}
 		
 		m_Title->setFont(*m_Font);
-		m_Title->setCharacterSize(20);
-		m_Title->setScale({ 0.06f, 0.06f });
-
 		m_Title->setString(title);
+		m_Title->setStyle(DEFAULT_FONT_STYLE);
+		m_Title->setScale(DEFAULT_FONT_SCALE);
 		m_Title->setFillColor(sf::Color::Black);
-		m_Title->setStyle(sf::Text::Regular);
+		m_Title->setCharacterSize(DEFAULT_FONT_CHAR_SIZE);
 
-		m_Title->setOrigin({ (20 * title.length()) / 2.0f, 20 / 2.0f });
+		sf::FloatRect title_rect = m_Title->getLocalBounds();
+		m_Title->setOrigin(title_rect.width / 2.0f, title_rect.height / 2.0f);
 		m_Title->setPosition({ m_Center.x, m_Radius + m_Center.y + m_Step });
 	}
 }
