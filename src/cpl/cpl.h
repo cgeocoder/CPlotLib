@@ -1,5 +1,5 @@
 #pragma once
 
 #include "window.h"
-#include "plot.h"
+#include "charts/plot.h"
 #include "function.h"

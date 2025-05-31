@@ -4,7 +4,7 @@
 #include "paths.h"
 
 namespace cpl {
-	Window::Window() {
+	Window::Window() : m_HalfWindowWidth{ 0 }, m_HalfWindowHeight{ 0 } {
 		m_WndThread = std::thread([&]() { this->run(); });
 	}
 
@@ -153,6 +153,14 @@ namespace cpl {
 					wnd.draw(make_line(lines));
 				}
 
+				for (Line& lines : plot.m_StaticLines) {
+					wnd.draw(make_line(lines));
+				}
+
+				for (Point& point : plot.m_StaticPoints) {
+					wnd.draw(make_point(point));
+				}
+
 				if (plot.m_Title) {
 					wnd.draw(*plot.m_Title);
 				}
@@ -197,7 +205,15 @@ namespace cpl {
 		line.setPosition(from_map_to_real(last_pos_point));
 		line.setFillColor(ln.m_Color);
 
-
 		return line;
+	}
+
+	sf::CircleShape Window::make_point(const Point& pt) {
+		sf::CircleShape point{ pt.m_Radius, 50};
+		point.setOrigin({ pt.m_Radius, pt.m_Radius });
+		point.setFillColor(pt.m_Color);
+		point.setPosition(from_map_to_real(pt.coords));
+
+		return point;
 	}
 }

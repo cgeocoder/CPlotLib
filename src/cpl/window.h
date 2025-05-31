@@ -3,7 +3,7 @@
 #ifndef __CPLOTLIB_WINDOW_H__
 #define __CPLOTLIB_WINDOW_H__
 
-#include "plot.h"
+#include "charts/plot.h"
 #include <thread>
 #include <vector>
 #include <mutex>
@@ -46,6 +46,7 @@ namespace cpl {
 		}
 
 		sf::RectangleShape make_line(const Line& ln);
+		sf::CircleShape make_point(const Point& pt);
 
 	public:
 		Window();
