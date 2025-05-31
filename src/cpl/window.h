@@ -1,9 +1,9 @@
 #pragma once
 
-#ifndef __CPLOTLIB_WINDOW_H__
-#define __CPLOTLIB_WINDOW_H__
+#ifndef __CchartLIB_WINDOW_H__
+#define __CchartLIB_WINDOW_H__
 
-#include "charts/plot.h"
+#include "charts/Chart.h"
 #include <thread>
 #include <vector>
 #include <mutex>
@@ -12,9 +12,11 @@
 
 
 namespace cpl {
+
+	// CPlotLib window for easy rendering graphics
 	class Window {
 	public:
-		friend class Plot;
+		friend class Chart;
 		friend class Line;
 
 	private:
@@ -52,13 +54,12 @@ namespace cpl {
 		Window();
 		~Window();
 
-		void add_plot(Plot& plot);
-
-		// friend static sf::RectangleShape make_line(cpl::Vec2f, cpl::Vec2f, float);
+		// Add a chart
+		void add_chart(Chart& Chart);
 
 	private:
-		std::mutex m_PlotMutex;
-		std::vector<Plot> m_Plots;
+		std::mutex m_chartMutex;
+		std::vector<Chart> m_charts;
 
 		std::thread m_WndThread;
 		unsigned int m_HalfWindowWidth, m_HalfWindowHeight;

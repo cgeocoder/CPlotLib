@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef __CPLOTLIB_PLOT_H__
-#define __CPLOTLIB_PLOT_H__
+#ifndef __CchartLIB_chart_H__
+#define __CchartLIB_chart_H__
 
 #include "../function.h"
 #include "../primitives/line.h"

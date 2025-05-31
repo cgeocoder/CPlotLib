@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef __CPLOTLIB_LINE_H__
-#define __CPLOTLIB_LINE_H__
+#ifndef __CchartLIB_LINE_H__
+#define __CchartLIB_LINE_H__
 
 #include "../cpl_math.h"
 #include <vector>
@@ -17,7 +17,7 @@ namespace cpl {
 
 	public:
 		friend class Window;
-		friend class Plot;
+		friend class Chart;
 
 		Vec2f a, b;
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef __CPLOTLIB_PATHS_H__
-#define __CPLOTLIB_PATHS_H__
+#ifndef __CchartLIB_PATHS_H__
+#define __CchartLIB_PATHS_H__
 
 
 namespace cpl {
@@ -9,4 +9,4 @@ namespace cpl {
 	constexpr const char* DEFAULT_FONT = "res\\calibri.ttf";
 }
 
-#endif // !__CPLOTLIB_PATHS_H__
+#endif // !__CchartLIB_PATHS_H__

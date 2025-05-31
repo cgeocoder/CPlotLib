@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef __CPLOTLIB_POINT_H__
-#define __CPLOTLIB_POINT_H__
+#ifndef __CchartLIB_POINT_H__
+#define __CchartLIB_POINT_H__
 
 #include "../cpl_math.h"
 #include <vector>
@@ -17,7 +17,7 @@ namespace cpl {
 
 	public:
 		friend class Window;
-		friend class Plot;
+		friend class Chart;
 
 		Vec2f coords;
 
@@ -35,4 +35,4 @@ namespace cpl {
 	};
 }
 
-#endif // !__CPLOTLIB_POINT_H__
+#endif // !__CchartLIB_POINT_H__

@@ -30,7 +30,7 @@ namespace cpl {
 
 		sf::RenderWindow wnd(
 			sf::VideoMode(window_size.x, window_size.y),
-			"CPlotLib",
+			"CchartLib",
 			sf::Style::Titlebar | sf::Style::Close,
 			wc_settings
 		);
@@ -124,62 +124,45 @@ namespace cpl {
 
 			wnd.clear(sf::Color::White);
 			wnd.setView(view);
-
-			/*sf::Text tmp_text;
-			sf::Font font;
-			if (!font.loadFromFile(DEFAULT_FONT_PATH2)) {
-				__debugbreak();
-			}
-
-			tmp_text.setFont(font);
-			tmp_text.setCharacterSize(24);
-
-			tmp_text.setScale({ 0.05f, 0.05f });
-			tmp_text.setString("123");
-			tmp_text.setFillColor(sf::Color::Red);
-			tmp_text.setStyle(sf::Text::Bold);
-			tmp_text.setPosition(from_map_to_real(Vec2f{ 0.0f, 0.0f }));
-
-			wnd.draw(tmp_text);*/
 			
-			m_PlotMutex.lock();
+			m_chartMutex.lock();
 
-			for (Plot& plot : m_Plots) {
-				for (Line& lines : plot.m_Lines) {
+			for (Chart& Chart : m_charts) {
+				for (Line& lines : Chart.m_Lines) {
 					wnd.draw(make_line(lines));
 				}
 
-				for (Line& lines : plot.m_StaticFuncLines) {
+				for (Line& lines : Chart.m_StaticFuncLines) {
 					wnd.draw(make_line(lines));
 				}
 
-				for (Line& lines : plot.m_StaticLines) {
+				for (Line& lines : Chart.m_StaticLines) {
 					wnd.draw(make_line(lines));
 				}
 
-				for (Point& point : plot.m_StaticPoints) {
+				for (Point& point : Chart.m_StaticPoints) {
 					wnd.draw(make_point(point));
 				}
 
-				if (plot.m_Title) {
-					wnd.draw(*plot.m_Title);
+				if (Chart.m_Title) {
+					wnd.draw(*Chart.m_Title);
 				}
 			}
 
-			m_PlotMutex.unlock();
+			m_chartMutex.unlock();
 
 			wnd.display();
 		}
 	}
 
-	void Window::add_plot(Plot& plot) {
-		m_PlotMutex.lock();
+	void Window::add_chart(Chart& Chart) {
+		m_chartMutex.lock();
 
-		if (plot.m_Title)
-			plot.m_Title->setPosition(from_map_to_real(plot.m_Title->getPosition()));
+		if (Chart.m_Title)
+			Chart.m_Title->setPosition(from_map_to_real(Chart.m_Title->getPosition()));
 
-		m_Plots.push_back(plot);
-		m_PlotMutex.unlock();
+		m_charts.push_back(Chart);
+		m_chartMutex.unlock();
 	}
 
 	void Window::done() {
