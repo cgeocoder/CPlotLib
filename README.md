@@ -4,4 +4,6 @@
 ![CPlotLib logotype](https://github.com/cgeocoder/CPlotLib/blob/main/res/logo.png)
 
 > [!IMPORTANT]
-> Dependencies: SFML >= 2.6.1
+> Powered by SFML: https://github.com/SFML/SFML
+
+
