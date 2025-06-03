@@ -1,7 +1,9 @@
 #pragma once
 
-#ifndef __CchartLIB_CHART_BASE_H__
-#define __CchartLIB_CHART_BASE_H__
+#ifndef __CPLOTLIB_PLOT_BASE_H__
+#define __CPLOTLIB_PLOT_BASE_H__
+
+#define _CRT_SECURE_NO_WARNINGS
 
 #include "../function.h"
 #include "../primitives/line.h"
@@ -18,7 +20,7 @@ namespace cpl {
 		static const float UltraHigh;
 	};
 
-	// The basic class of Chart
+	// The basic class of Plot
 	class ChartBase {
 	protected:
 		Vec2f m_Center;
@@ -32,4 +34,4 @@ namespace cpl {
 	};
 }
 
-#endif // !__CchartLIB_CHART_BASE_H__
+#endif // !__CPLOTLIB_PLOT_BASE_H__

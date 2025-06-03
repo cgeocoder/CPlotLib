@@ -1,13 +1,14 @@
 #pragma once
 
-#ifndef __CchartLIB_WINDOW_H__
-#define __CchartLIB_WINDOW_H__
+#ifndef __CPLOTLIB_WINDOW_H__
+#define __CPLOTLIB_WINDOW_H__
 
-#include "charts/Chart.h"
+#include "cpl_math.h"
+#include "charts/plot.h"
+
 #include <thread>
 #include <vector>
 #include <mutex>
-#include "cpl_math.h"
 #include <corecrt_math_defines.h>
 
 
@@ -16,7 +17,7 @@ namespace cpl {
 	// CPlotLib window for easy rendering graphics
 	class Window {
 	public:
-		friend class Chart;
+		friend class Plot;
 		friend class Line;
 
 	private:
@@ -47,19 +48,17 @@ namespace cpl {
 			return sf::Vector2f(cood.x - m_HalfWindowWidth, m_HalfWindowHeight - cood.y);
 		}
 
-		sf::RectangleShape make_line(const Line& ln);
-		sf::CircleShape make_point(const Point& pt);
-
 	public:
 		Window();
 		~Window();
 
-		// Add a chart
-		void add_chart(Chart& Chart);
+		// Add a new plot
+		// @param plot - cpl::Plot object
+		void add_plot(Plot& plot);
 
 	private:
-		std::mutex m_chartMutex;
-		std::vector<Chart> m_charts;
+		std::mutex m_plotMutex;
+		std::vector<Plot> m_plots;
 
 		std::thread m_WndThread;
 		unsigned int m_HalfWindowWidth, m_HalfWindowHeight;

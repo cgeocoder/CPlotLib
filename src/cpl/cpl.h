@@ -4,7 +4,7 @@
 #define __CPLOTLIB_H__
 
 #include "window.h"
-#include "charts/chart.h"
+#include "charts/plot.h"
 #include "primitives/line.h"
 #include "primitives/point.h"
 #include "function.h"

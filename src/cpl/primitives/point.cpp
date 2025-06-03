@@ -3,9 +3,9 @@
 #include <iostream>
 
 namespace cpl {
-	Point::Point() : coords{ 0.0f, 0.0f }, m_Radius{ DEFAULT_POINT_RADIUS }, m_Color{ sf::Color::Black } {}
-	Point::Point(Vec2f coords) : coords{ coords }, m_Radius{ DEFAULT_POINT_RADIUS }, m_Color{ sf::Color::Black } {}
-	Point::Point(Vec2f coords, float radius) : coords{ coords }, m_Radius{ radius }, m_Color{ sf::Color::Black } {}
+	Point::Point() : coords{ 0.0f, 0.0f }, m_Radius{ DEFAULT_POINT_RADIUS } { m_Color = sf::Color::Black; }
+	Point::Point(Vec2f coords) : coords{ coords }, m_Radius{ DEFAULT_POINT_RADIUS } { m_Color = sf::Color::Black; }
+	Point::Point(Vec2f coords, float radius) : coords{ coords }, m_Radius{ radius } { m_Color = sf::Color::Black; }
 
 	Point::Point(Vec2f coords, const char* color) : coords{ coords }, m_Radius{ DEFAULT_POINT_RADIUS } {
 		set_color(color);
@@ -15,7 +15,7 @@ namespace cpl {
 		set_color(color);
 	}
 
-	Point::Point(Vec2f coords, float radius, sf::Color color) : coords{ coords }, m_Radius{ radius }, m_Color{ color } {}
+	Point::Point(Vec2f coords, float radius, sf::Color color) : coords{ coords }, m_Radius{ radius } { m_Color = color; }
 
 	void Point::set_color(const char* color) {
 		try {
